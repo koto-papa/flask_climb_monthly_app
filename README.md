@@ -11,7 +11,7 @@ streamlitで作成したリザルト入力・集計アプリをもとに、flask
 <br>
 
 # デモ
-
+![GIF_20240719_131225_847](https://github.com/user-attachments/assets/5f13e8ff-c038-42cb-82d4-e1107af5432c)
 
 # 環境
 Python==3.12.3<br>
