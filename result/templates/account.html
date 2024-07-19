@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<section id="user_update">
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="card bg-success text-center">
+                    <div class="card-body text-light">
+                    <h3>リザルト更新</h3>
+                    <form method="post">
+                        {{ form.hidden_tag() }}                           
+                        <hr>
+                        <p>完登した課題数を選択してください</p>
+                        <div class="mb-3" >
+                            {{ render_field(
+                                form.result, 
+                                class='form-control form-control-lg'
+                                )
+                            }}
+                        </div>
+                        {{ form.submit(
+                            class='btn btn-outline-light w-100', 
+                            value='更新'
+                            )
+                        }}
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if current_user.is_administrator() %}
+<section id="menu">
+    <div class="container my-3 py-3 col-lg-6 mx-auto">
+        <div class="row">
+            <div class="mx-auto">
+                <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#del_modal">削除</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<div class="modal fade" id="del_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">削除確認</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <b>登録を削除しますか？</b>
+            </div>
+            <div class="modal-footer">
+                <form action="{{ url_for('users.delete_user', user_id=form.id) }}" method="post">
+                    <input type="submit" class="btn btn-danger" value="削除">
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+{% endblock %}

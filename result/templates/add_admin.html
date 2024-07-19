@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section id="menu">
+    <div class="container my-3 py-3 col-lg-4 mx-auto">
+        <div class="row">
+            <div class="mx-auto">
+                <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#del_modal">管理者登録</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="del_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">確認</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <b>管理者を登録しますか？</b>
+            </div>
+            <div class="modal-footer">
+                <form action="{{ url_for('users.add_admin') }}" method="post">
+                    <input type="submit" class="btn btn-danger" value="登録">
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+
+{% endblock %}

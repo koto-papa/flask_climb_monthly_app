@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if current_user.is_administrator() %}
+<section id="menu">
+    <div class="container my-3 col-lg-6 mx-auto">
+        <div class="row">
+            <div class="mx-auto">
+                <button type="button" class="btn btn-primary w-100" onclick="location.href='/download'">リザルトのダウンロード</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="menu">
+    <div class="container my-3 col-lg-6 mx-auto">
+        <div class="row">
+            <div class="mx-auto">
+                <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#del_modal">全件削除</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<div class="modal fade" id="del_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">削除確認</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <b>管理者以外すべての登録を削除しますか？</b>
+            </div>
+            <div class="modal-footer">
+                <form action="{{url_for('users.delete_all')}}" method="post">
+                    <input type="submit" class="btn btn-danger" value="削除">
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+<section id="list">
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-6 m-auto">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>リザルト一覧</h3>
+                    </div>
+                    <table class="table table-striped text-center">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>ニックネーム</th>
+                                <th>完登数</th>
+                                <th>変更</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.result }}</td>
+                                <td>
+                                    {% if current_user.is_administrator() or current_user.id == user.id %} 
+                                    <a href="{{url_for('users.account', user_id=user.id)}}" class="btn btn-success">変更</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

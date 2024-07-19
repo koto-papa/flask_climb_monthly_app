@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<header id="page-header">
+    <div class="container my-3 col-lg-6 mx-auto bg-light">
+        <div class="row">
+            <div class="col-md-6 m-auto text-center">
+                <h1>climbing gym</h1>
+                <h4>climb monthly result</h4>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div style="text-align:center">
+    <img src="/static/photo-165790233.jpg" >
+</div>
+
+<section id="register">
+    <div class="container my-3 col-lg-4 mx-auto">
+        <div class="row">
+            <div class="mx-auto">
+                <a href="{{url_for('users.register')}}" class="btn btn-primary w-100">リザルト登録</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="login">
+    <div class="container my-3 col-lg-4 mx-auto">
+        <div class="row">
+            <div class="mx-auto">
+                <a href="{{url_for('users.login')}}" class="btn btn-primary w-100">ログイン</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
